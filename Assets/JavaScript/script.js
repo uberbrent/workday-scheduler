@@ -38,6 +38,7 @@ $(".col-10").on("click", function() {
         .text()
         .trim();
     var textInput = $("<textarea>")
+        .attr("id", "task")
         .addClass("col-10")
         .val(text);
     $(this).replaceWith(textInput);
@@ -45,6 +46,11 @@ $(".col-10").on("click", function() {
 });
 
 // saves task in the textfield to local storage then converts it back into a <p> element
-$("")
+$(".saveBtn").on("click", function() {
+    var text = $("#task")
+        .text()
+        .trim();
+    console.log(text);
+})
 
 localDate();
