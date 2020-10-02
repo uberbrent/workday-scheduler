@@ -1,21 +1,50 @@
-// create schedule bones xxx
-    // 9 rows for the hours of the day xxx
-    // 3 columns for the hour/task/save button xxx
 // work on styling
-    // color style xxx
     // fonts
-    // center header text? xxx
     // classes to match time of day
     // colors will match when time has passed or time still remaining
-    // save button icon to lock in task
+    // format local date on top of screen
 // manual css
-    // make proper rounding on save button
     // padding/margin to time field and save button
 // javascript
-    // moment.js to determine time
+    // moment.js to determine time xxx 
     // refresh page every 10 minutes
     // assign class to determine color in bootstrap
     // save button fuctionality to lock in text
-    // on click update the task field
-    // save tasks to local storage
-    // display current day at the top of the screen
+    // save tasks to local storage convert textfield back to P
+
+var tasks = {}
+var localTime = moment()
+
+// handles saving to local storage
+var saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+};
+
+// sets date to display properly at the top of the page
+var localDate = function() {
+    var date = localTime.format("MMMM DD, YYYY");
+    $("#currentDay").append(date);
+};
+
+// checks the current time and updates each hour to shift classes
+var rollingHour = function() {
+    $("#task").removeClass("past", "present", "future")
+
+}
+
+// turns p field into a text box to change tasks
+$(".col-10").on("click", function() {
+    var text = $(this)
+        .text()
+        .trim();
+    var textInput = $("<textarea>")
+        .addClass("col-10")
+        .val(text);
+    $(this).replaceWith(textInput);
+    textInput.trigger("focus");
+});
+
+// saves task in the textfield to local storage then converts it back into a <p> element
+$("")
+
+localDate();
