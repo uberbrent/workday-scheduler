@@ -1,12 +1,10 @@
 // work on styling
-    // fonts
     // classes to match time of day
     // colors will match when time has passed or time still remaining
     // format local date on top of screen
 // manual css
     // padding/margin to time field and save button
 // javascript
-    // moment.js to determine time xxx 
     // refresh page every 10 minutes
     // assign class to determine color in bootstrap
     // save button fuctionality to lock in text
@@ -33,22 +31,33 @@ var rollingHour = function() {
 }
 
 // turns p field into a text box to change tasks
-$(".col-10").on("click", function() {
+$(".taskText").on("click", function() {
     var text = $(this)
         .text()
         .trim();
     var textInput = $("<textarea>")
-        .attr("id", "task")
+        .attr("id", "textInput")
         .addClass("col-10")
         .val(text);
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
 });
 
+$("#task").on("blur", "textarea", function() {
+    var text = $(this)
+        .val()
+        .trim();
+    var taskDiv = $("<p>")
+        .addClass("task-text")
+        .text(text);
+    $(this).replaceWith(taskDiv);
+});
+
 // saves task in the textfield to local storage then converts it back into a <p> element
 $(".saveBtn").on("click", function() {
-    var text = $("#task")
-        .text()
+    var text = $(".row")
+        .children("textarea")
+        .val()
         .trim();
     console.log(text);
 })
