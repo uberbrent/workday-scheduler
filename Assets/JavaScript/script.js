@@ -9,7 +9,11 @@
     // save button fuctionality to lock in text
     // save tasks to local storage convert textfield back to P
 
-var tasks = {}
+var tasks = JSON.parse(localStorage.getItem("taskList")) || [];
+    for(var i = 9; i < tasks.length; i++) {
+        $("#task-"+i).val(tasks[i]);
+    };
+
 var localTime = moment()
 
 // handles saving to local storage
@@ -24,9 +28,26 @@ var localDate = function() {
 };
 
 // checks the current time and updates each hour to shift classes
-// var rollingHour = function() {
-//     if(localTime)
-// };
+var rollingHour = function() {
+    var currentTime = moment().hour()
+    
+    for(i = 9; i < 18 ; i++) {
+        var taskHour = parseInt($("#task-"+[i]).attr("id").split("-")[1]);
+
+        if(currentTime > taskHour) {
+            $("#task-"+[taskHour])
+            .removeClass("future")
+            .addClass("past");
+        } else if(currentTime === taskHour) {
+            $("#task-"+[taskHour])
+            .removeClass("future")
+            .addClass("present");
+        } else {
+            $("#task-"+[taskHour])
+            .addClass("future");
+        }
+    }
+};
 
 // saves task in the textfield to local storage
 $(".saveBtn").on("click", function() {
@@ -38,16 +59,13 @@ $(".saveBtn").on("click", function() {
 });
 
 localDate();
+rollingHour();
+
+setInterval(function() {
+    rollingHour();
+}, 60000);
 
 
 
 
 
-
-
-
-// setInterval(function() {
-    //     $(".col-10 .taskText").each(function (el) {
-        //         auditTask(el);
-        //     })
-// }, 1000);
