@@ -1,11 +1,10 @@
 // work on styling
-    // classes to match time of day
     // colors will match when time has passed or time still remaining
     // format local date on top of screen
 // manual css
     // padding/margin to time field and save button
 // javascript
-    // refresh page every 10 minutes
+    // refresh page every 1 minute
     // assign class to determine color in bootstrap
     // save button fuctionality to lock in text
     // save tasks to local storage convert textfield back to P
@@ -25,41 +24,30 @@ var localDate = function() {
 };
 
 // checks the current time and updates each hour to shift classes
-var rollingHour = function() {
-    $("#task").removeClass("past", "present", "future")
+// var rollingHour = function() {
+//     if(localTime)
+// };
 
-}
-
-// turns p field into a text box to change tasks
-$(".taskText").on("click", function() {
-    var text = $(this)
-        .text()
-        .trim();
-    var textInput = $("<textarea>")
-        .attr("id", "textInput")
-        .addClass("col-10")
-        .val(text);
-    $(this).replaceWith(textInput);
-    textInput.trigger("focus");
-});
-
-$("#task").on("blur", "textarea", function() {
-    var text = $(this)
-        .val()
-        .trim();
-    var taskDiv = $("<p>")
-        .addClass("task-text")
-        .text(text);
-    $(this).replaceWith(taskDiv);
-});
-
-// saves task in the textfield to local storage then converts it back into a <p> element
+// saves task in the textfield to local storage
 $(".saveBtn").on("click", function() {
-    var text = $(".row")
-        .children("textarea")
-        .val()
-        .trim();
-    console.log(text);
-})
+    var hour = parseInt($(this).attr("id").split("-")[1]);
+
+    tasks[hour] = $("#task-"+hour).val();
+
+    localStorage.setItem("taskList", JSON.stringify(tasks));
+});
 
 localDate();
+
+
+
+
+
+
+
+
+// setInterval(function() {
+    //     $(".col-10 .taskText").each(function (el) {
+        //         auditTask(el);
+        //     })
+// }, 1000);
